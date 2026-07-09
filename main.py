@@ -1,7 +1,7 @@
 from services import cadastrar_autor, listar_autores, buscar_autor_por_id, atualizar_autor, deletar_autor, cadastrar_livro, listar_livros, buscar_livro_por_id , cadastrar_leitores  , atualizar_leitor , deletar_leitor
 
 while True:
-    print("1 - Cadastrar usuario")
+    print("1 - Cadastrar Leitor")
     print("2 - Gerenciar autores")
     print("3 - Gerenciar livros")
     print("0 - Sair")
@@ -140,7 +140,7 @@ while True:
 
             elif opcao == "5":
                 from services import deletar_livro
-                id = int(input("Digite o id do livro que queira deletar"))
+                id = int(input("Digite o id do livro que queira deletar: "))
                 livro_deletado = deletar_livro(id)
                 if livro_deletado:
                     print("livro deletado com sucesso")
@@ -198,8 +198,8 @@ while True:
             elif opcao == "3":
                 from services import buscar_leitor_id
                 id_leitor = int(input("Digite o ID do leitor: "))
-                id_leitor = buscar_leitor_id (id_leitor)
-                if id_leitor:
+                leitor = buscar_leitor_id (id_leitor)
+                if leitor:
                     print(f"nome: {leitor.nome}, telefone {leitor.telefone} email: {leitor.email}")
 
                 else:
@@ -236,6 +236,3 @@ while True:
 
 
 
-
-
-            
