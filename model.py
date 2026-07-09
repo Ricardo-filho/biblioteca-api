@@ -8,14 +8,15 @@ class Autor:
 
 
 class Livro:
-    def __init__(self,id,titulo,ISBN,ano_de_publicacao,quantidade_total_de_livros,quantidade_disponivel,autores ):
+    def __init__(self,id,titulo,ISBN,ano_de_publicacao,quantidade_total_de_livros,quantidade_disponivel,autores_do_livro):
         self.id = id
         self.titulo = titulo
         self.ISBN = ISBN
         self.ano_de_publicacao = ano_de_publicacao
         self.quantidade_total_de_livros = quantidade_total_de_livros
         self.quantidade_disponivel = quantidade_disponivel
-        self.autores = autores
+        self.autores_do_livro = autores_do_livro
+        
         
 
 class Emprestimo:
@@ -34,3 +35,10 @@ class Leitor:
         self.nome = nome
         self.email = email
         self.telefone = telefone
+        
+
+
+
+
+
+        
