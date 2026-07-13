@@ -1,9 +1,10 @@
-from services import cadastrar_autor, listar_autores, buscar_autor_por_id, atualizar_autor, deletar_autor, cadastrar_livro, listar_livros, buscar_livro_por_id , cadastrar_leitores  , atualizar_leitor , deletar_leitor
+from services import cadastrar_autor, listar_autores, buscar_autor_por_id, atualizar_autor, deletar_autor, cadastrar_livro, listar_livros, buscar_livro_por_id, cadastrar_leitores, atualizar_leitor, deletar_leitor, registrar_emprestimos, registrar_devolucao
 
 while True:
-    print("1 - Cadastrar Leitor")
-    print("2 - Gerenciar autores")
-    print("3 - Gerenciar livros")
+    print("1 - Gerenciar Leitor ")
+    print("2 - Gerenciar autores ")
+    print("3 - Gerenciar livros ")
+    print("4 - Gerencia Emprestimos ")
     print("0 - Sair")
     escolher = input("escolha uma opcao:")
 
@@ -206,10 +207,6 @@ while True:
                     print("leitor  nao encontrado")
 
 
-
-
-
-
             elif opcao == "4":
                 from services import atualizar_leitor
                 id = int(input("digite o id do leitor:"))
@@ -235,4 +232,64 @@ while True:
 
 
 
+
+    elif escolher == "4":
+          while True:
+            print("0 - Sair")
+            print("1 - Registrar emprestimo")
+            print("2 - Registrar Devolucao ")
+            print("3 - Listar Emprestimos")
+            print("4 - Listar emprestimos Atrasado")
+
+            opcao = input("Digite a opção desejada: ")
+
+            if opcao == "0":
+                break
+
+
+            if opcao == "1":
+                id_livro = int(input("Digite o id do livro: "))
+                id_leitor = int(input("Digite o id do leitor: "))
+                data_de_retirada = input("Digite a data de retirada (dd/mm/aaaa): ")
+                resultado = registrar_emprestimos(id_livro, id_leitor, data_de_retirada)
+
+                if resultado:
+                    print("Emprestimo registrado com sucesso")
+                    print(f"Data prevista de devolução: {resultado.data_prevista_devolucao}")
+                else:
+                    print("Nao foi possivel registrar o emprestimo")
+
+            elif opcao == "2":
+                from services import registrar_devolucao
+                id_emprestimo = int(input("Digite o id do emprestimo: "))
+                resultado = registrar_devolucao(id_emprestimo)
+
+                if resultado:
+                    print("Devolução registrada com sucesso!")
+                
+                else:
+                 print("Não foi possível registrar a devolução.")
+
+
+            elif opcao == "3":
+                from services import listar_emprestimos_por_leitor
+                id_leitor = int(input("Digite o id do leitor: "))
+                encontrados = listar_emprestimos_por_leitor(id_leitor)
+                if encontrados:
+                    for emprestimo in encontrados:
+                         print(f"ID: {emprestimo.id}, Livro: {emprestimo.livro.titulo}, Retirada: {emprestimo.data_de_retirada}, Prevista: {emprestimo.data_prevista_devolucao}, Status: {emprestimo.status}")
+                else:
+                    print("Nenhum empréstimo encontrado para esse leitor.")
+
+
+
+            elif opcao == "4":
+                from services import listar_emprestimos_atrasados
+                atrasados = listar_emprestimos_atrasados()
+                if atrasados:
+                    for emprestimo in atrasados:
+                        print(f"ID: {emprestimo.id}, Livro: {emprestimo.livro.titulo}, Leitor: {emprestimo.usuario.nome}, Prevista: {emprestimo.data_prevista_devolucao}")
+
+                else:
+                    print("Nenhum empréstimo atrasado.")
 
